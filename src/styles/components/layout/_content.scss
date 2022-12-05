@@ -1,0 +1,68 @@
+//
+//  Content
+//
+
+.content {
+	@include padding(map-get($content, padding-y) map-get($content, padding-x));
+
+	display: flex;
+	flex: 1 0 auto;
+
+	.header + & {
+		@include media-breakpoint-down(map-get($aside, mobile-breakpoint)) {
+			padding-top: map-deep-get($header, mobile, height);
+		}
+	}
+}
+
+.main{
+	width: 100%;
+	display: flex;
+	padding: 0 1rem;
+	background-color: #ededed;
+	> * {
+		z-index: 1;
+	}
+	&__wrapper{
+		@include media-breakpoint-up(map-get($main, mobile-breakpoint)) {
+			@include padding(map-get($main, padding-y) #{map-get($main, padding-x) * -1});
+		}
+
+		display: flex;
+		flex-wrap: wrap;
+
+		@include media-breakpoint-down(map-get($main, mobile-breakpoint)) {
+			max-width: 100%;
+		}
+
+		> * {
+			max-width: 100%;
+			flex-shrink: 0;
+		}
+
+	}
+	&__sidebar{ 
+		@include media-breakpoint-up(map-get($main, mobile-breakpoint)) {
+			@include padding(map-get($main, padding-y) map-get($main, padding-x));
+		}
+
+		flex: 0 0 auto;
+		width: 260px;
+
+		@include media-breakpoint-down(map-get($main, mobile-breakpoint)) {
+			width: 100%;
+		}
+	}
+	&__content{
+		@include media-breakpoint-up(map-get($main, mobile-breakpoint)) {
+			@include padding(map-get($main, padding-y) map-get($main, padding-x));
+		}
+
+		flex: 0 0 auto;
+    	width: calc(100% - 260px);
+
+		@include media-breakpoint-down(map-get($main, mobile-breakpoint)) {
+			width: 100%;
+		}
+	}
+}
